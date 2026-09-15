@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     title: 'Fikerte Kiflu | Full-Stack Developer & Software Engineer',
     description: 'Building apps people actually use. Next.js, TypeScript, Go, Node.js.',
   },
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
