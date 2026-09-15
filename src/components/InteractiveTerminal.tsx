@@ -23,11 +23,14 @@ Type 'help' to see available commands or click quick shortcut chips below.`,
     },
   ]);
 
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const terminalContentRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Only scroll internal terminal box if user actually entered commands (never on page load)
+    if (history.length > 1 && terminalContentRef.current) {
+      terminalContentRef.current.scrollTop = terminalContentRef.current.scrollHeight;
+    }
   }, [history]);
 
   const handleCommand = (cmd: string) => {
@@ -139,6 +142,7 @@ Type 'help' to see available commands or click quick shortcut chips below.`,
 
           {/* Terminal output content */}
           <div
+            ref={terminalContentRef}
             style={{
               padding: '1.5rem',
               fontFamily: 'var(--font-mono)',
@@ -193,7 +197,6 @@ Type 'help' to see available commands or click quick shortcut chips below.`,
                 }}
               />
             </div>
-            <div ref={bottomRef} />
           </div>
 
           {/* Quick command shortcuts bar */}
